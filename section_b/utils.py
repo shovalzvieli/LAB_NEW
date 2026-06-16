@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any, Dict, Iterable, Iterator, List
+from typing import Any, Dict, Iterator, List
 
 STUDENT_ROOT = Path(__file__).resolve().parent
 DATA_DIR = STUDENT_ROOT / "data"
@@ -25,6 +25,7 @@ def normalize_page_id(value: Any) -> int:
 
 
 def load_public_queries(path: Path | None = None) -> List[Dict[str, Any]]:
+    """Load public queries and normalize their relevant page IDs."""
     path = path or PUBLIC_QUERIES_PATH
     rows = json.loads(path.read_text(encoding="utf-8"))
     for row in rows:
@@ -49,6 +50,7 @@ def iter_entries(entries_dir: Path | None = None) -> Iterator[Dict[str, Any]]:
 
 
 def entry_text(record: Dict[str, Any]) -> str:
+    """Return the title-prefixed text used for full-page embedding."""
     title = record.get("title", "")
     content = record.get("content", "")
     if title:
