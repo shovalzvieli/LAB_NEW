@@ -97,6 +97,15 @@ The corpus directory is part of the course handout and is not required for the
 normal grading-time evaluation path, because `run()` loads the prebuilt
 artifacts.
 
+## Development Notes
+
+- Keep `eval.py` and `evaluation.py` unchanged; they are the grading/evaluation
+  helpers.
+- Query-time changes should remain inside `main.py`, `retrieve.py`, `index.py`,
+  `embed.py`, `chunk.py`, or `utils.py`.
+- Re-run `python scripts/eval_public.py` after retrieval changes to verify the
+  public NDCG score.
+
 ## Assumptions
 
 - `data/public_queries.json` is included for public self-testing.
