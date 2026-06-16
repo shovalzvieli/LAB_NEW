@@ -2,16 +2,17 @@
 
 ## Project Overview
 
-This repository contains the Section B retrieval system for Project A.  The
-autograder calls:
+This directory contains the Section B retrieval system for Project A. The
+submission exposes one required function:
 
 ```python
 run(queries: list[str]) -> list[list[int]]
 ```
 
-from `main.py` once with a batch of evaluation queries.  The function returns
-one ranked list of Wikipedia page IDs per query, ordered from most relevant to
-least relevant.  Only the first 10 page IDs are scored with NDCG@10.
+The autograder imports `run` from `main.py` and calls it once with a batch of
+evaluation queries. The function returns one ranked list of Wikipedia page IDs
+per query, ordered from most relevant to least relevant. Only the first 10 page
+IDs are scored with NDCG@10.
 
 ## Pipeline
 
@@ -29,7 +30,7 @@ The system is split across small modules:
 
 ## Setup
 
-Install the required dependencies:
+From the `section_b/` directory, install the required dependencies:
 
 ```bash
 pip install -r requirements.txt
@@ -42,10 +43,16 @@ depend on local absolute paths.
 
 ## Public Evaluation
 
-From the repository root, run:
+From the `section_b/` directory, run:
 
 ```bash
 python scripts/eval_public.py
+```
+
+From the repository root, the equivalent command is:
+
+```bash
+python section_b/scripts/eval_public.py
 ```
 
 Current public result:
@@ -96,6 +103,13 @@ data/Wikipedia Entries/
 The corpus directory is part of the course handout and is not required for the
 normal grading-time evaluation path, because `run()` loads the prebuilt
 artifacts.
+
+## Runtime Flow
+
+At query time, `run()` loads the prebuilt artifacts, embeds the full query batch,
+retrieves dense FAISS candidates, adds lexical matches from `lexical.json.gz`,
+and returns the top page IDs for each query. No corpus rebuild is needed during
+grading.
 
 ## Development Notes
 
