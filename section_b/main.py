@@ -14,7 +14,7 @@ from retrieve import search_batch
 
 def run(queries: List[str]) -> List[List[int]]:
     """
-    Rank corpus pages for each query.
+    Autograder entry point: rank corpus pages for each query.
 
     Parameters
     ----------
@@ -31,7 +31,7 @@ def run(queries: List[str]) -> List[List[int]]:
 
 
 def build_offline_index() -> None:
-    """Run once locally to create artifacts/ (not timed at grading)."""
+    """Local development helper for creating artifacts/; not used by grading."""
     build_index()
 
 
