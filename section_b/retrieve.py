@@ -21,9 +21,13 @@ KIND_BONUS = {
     "full": 0.012,
     "chunk": 0.0,
 }
+# Blends normalized lexical reranking scores into dense retrieval scores.
 LEXICAL_WEIGHT = 0.50
+# Number of dense FAISS candidates to keep before lexical reranking.
 DENSE_CANDIDATES = 2000
+# Extra weight for multi-token lexical phrase matches.
 PHRASE_BOOST = 3.4
+# Dampens lexical scores for longer documents.
 LENGTH_NORM = 0.0018
 DENSE_HIT_WEIGHTS = (1.0, 0.08, 0.05, 0.03, 0.02)
 TOKEN_RE = re.compile(r"[a-z0-9]+")
