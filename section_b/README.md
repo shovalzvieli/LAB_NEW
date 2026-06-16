@@ -41,6 +41,18 @@ The query embedding model
 environment.  The code uses only repository-relative paths, so it does not
 depend on local absolute paths.
 
+## Quick Start
+
+For a fresh clone with the committed artifacts already present:
+
+```bash
+cd section_b
+pip install -r requirements.txt
+python scripts/eval_public.py
+```
+
+The offline index rebuild is not part of the normal grading path.
+
 ## Public Evaluation
 
 From the `section_b/` directory, run:
@@ -124,9 +136,10 @@ grading.
 
 - Install requirements from `requirements.txt`.
 - Verify the required files under `artifacts/` exist.
-- Run the public evaluation script.
+- Run the public evaluation command from `section_b/`.
 - Do not modify `eval.py` or `evaluation.py`.
 - Confirm `git status` is clean.
+- Add the presentation video link in the assumptions section when available.
 
 ## Assumptions
 
