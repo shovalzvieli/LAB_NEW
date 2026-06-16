@@ -53,6 +53,7 @@ def embed_queries(queries: List[str], *, batch_size: int = 64) -> np.ndarray:
         in_path = tmpdir / "queries.json"
         out_path = tmpdir / "vectors.npy"
         in_path.write_text(json.dumps(list(queries)), encoding="utf-8")
+        # Keep query embedding isolated from the parent FAISS process state.
         code = (
             "import json, numpy as np, sys; "
             "from sentence_transformers import SentenceTransformer; "
@@ -63,6 +64,7 @@ def embed_queries(queries: List[str], *, batch_size: int = 64) -> np.ndarray:
             "convert_to_numpy=True, normalize_embeddings=True); "
             "np.save(sys.argv[2], np.asarray(v, dtype=np.float32))"
         )
+        # Force local model loading during grading, where network access is unavailable.
         env = dict(os.environ, HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1")
         subprocess.run([sys.executable, "-c", code, str(in_path), str(out_path)], check=True, env=env)
         return np.load(out_path)
