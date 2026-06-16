@@ -1,2 +1,3 @@
 student/
-artifacts/
+/artifacts/
+.DS_Store
