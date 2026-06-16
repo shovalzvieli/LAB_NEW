@@ -108,7 +108,7 @@ def build_index(
 
 
 def _load_faiss_array(root: Path) -> np.ndarray:
-    """Load the serialized FAISS array, including GitHub-safe split parts."""
+    """Load the serialized FAISS array from a full file or split part files."""
     full_path = root / FAISS_INDEX_NAME
     if full_path.exists():
         return np.load(full_path)
