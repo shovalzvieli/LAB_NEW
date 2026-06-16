@@ -120,6 +120,14 @@ grading.
 - Re-run `python scripts/eval_public.py` after retrieval changes to verify the
   public NDCG score.
 
+## Pre-Submission Checklist
+
+- Install requirements from `requirements.txt`.
+- Verify the required files under `artifacts/` exist.
+- Run the public evaluation script.
+- Do not modify `eval.py` or `evaluation.py`.
+- Confirm `git status` is clean.
+
 ## Assumptions
 
 - `data/public_queries.json` is included for public self-testing.
