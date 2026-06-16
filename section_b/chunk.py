@@ -1,4 +1,4 @@
-"""Optional preprocessing and chunking."""
+"""Optional preprocessing and chunking for the retrieval index."""
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -9,10 +9,14 @@ from utils import entry_text
 CHUNK_WORDS = 180
 CHUNK_OVERLAP = 45
 MAX_CONTENT_WORDS = 760
+MAX_CHUNKS_PER_PAGE = 4
+MIN_CHUNK_WORDS = 30
 
 
 @dataclass
 class Chunk:
+    """A text view that maps back to one Wikipedia page."""
+
     page_id: int
     chunk_id: int
     text: str
@@ -28,10 +32,10 @@ def _word_chunks(words: List[str]) -> List[str]:
     step = max(1, CHUNK_WORDS - CHUNK_OVERLAP)
     for start in range(0, min(len(words), MAX_CONTENT_WORDS), step):
         part = words[start : start + CHUNK_WORDS]
-        if len(part) < 30:
+        if len(part) < MIN_CHUNK_WORDS:
             break
         chunks.append(" ".join(part))
-        if len(chunks) >= 4 or start + CHUNK_WORDS >= len(words):
+        if len(chunks) >= MAX_CHUNKS_PER_PAGE or start + CHUNK_WORDS >= len(words):
             break
     return chunks
 
