@@ -46,25 +46,24 @@ depend on local absolute paths.
 For a fresh clone with the committed artifacts already present:
 
 ```bash
-cd section_b
-pip install -r requirements.txt
 python scripts/eval_public.py
 ```
 
-The offline index rebuild is not part of the normal grading path.
+The offline index rebuild is not part of the normal grading path. If running
+commands from inside `section_b/`, use `python scripts/eval_public.py`.
 
 ## Public Evaluation
 
-From the `section_b/` directory, run:
+From the repository root, run:
 
 ```bash
 python scripts/eval_public.py
 ```
 
-From the repository root, the equivalent command is:
+From the `section_b/` directory, the equivalent command is:
 
 ```bash
-python section_b/scripts/eval_public.py
+python scripts/eval_public.py
 ```
 
 Current public result:
@@ -134,9 +133,9 @@ grading.
 
 ## Pre-Submission Checklist
 
-- Install requirements from `requirements.txt`.
+- Install requirements from `section_b/requirements.txt`.
 - Verify the required files under `artifacts/` exist.
-- Run the public evaluation command from `section_b/`.
+- Run `python scripts/eval_public.py` from the repository root.
 - Do not modify `eval.py` or `evaluation.py`.
 - Confirm `git status` is clean.
 - Add the presentation video link in the assumptions section when available.
