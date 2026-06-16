@@ -12,9 +12,14 @@ from main import run
 from utils import PUBLIC_QUERIES_PATH
 
 
+def _query_text(row: dict) -> str:
+    """Return the supported public-query text field."""
+    return str(row.get("query", row.get("question", row.get("text", ""))))
+
+
 def main() -> None:
     rows = load_query_file(PUBLIC_QUERIES_PATH)
-    queries = [str(row.get("query", row.get("question", row.get("text", "")))) for row in rows]
+    queries = [_query_text(row) for row in rows]
     relevant = [row["relevant_page_ids"] for row in rows]
     stats = evaluate_run(queries, relevant, run)
     print(f"mean_ndcg@10={stats['mean_ndcg@10']:.4f}")
