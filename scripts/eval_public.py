@@ -1,11 +1,30 @@
-"""Root-level entry point for the Section B public evaluation."""
+"""Evaluate Section B on public_queries.json."""
 from __future__ import annotations
 
-import runpy
+import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-runpy.run_path(
-    str(ROOT / "section_b" / "scripts" / "eval_public.py"),
-    run_name="__main__",
-)
+SECTION_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(SECTION_ROOT))
+
+from evaluation import evaluate_run, load_query_file
+from main import run
+from utils import PUBLIC_QUERIES_PATH
+
+
+def _query_text(row: dict) -> str:
+    """Return the supported public-query text field."""
+    return str(row.get("query", row.get("question", row.get("text", ""))))
+
+
+def main() -> None:
+    rows = load_query_file(PUBLIC_QUERIES_PATH)
+    queries = [_query_text(row) for row in rows]
+    relevant = [row["relevant_page_ids"] for row in rows]
+    stats = evaluate_run(queries, relevant, run)
+    print(f"mean_ndcg@10={stats['mean_ndcg@10']:.4f}")
+    print(f"num_queries={int(stats['num_queries'])}")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,5 +1,9 @@
 student/
-/artifacts/
+/section_b/
 .DS_Store
 __pycache__/
 *.py[cod]
+/artifacts/chunks.faiss.npy
+/artifacts/lexical.json
+/data/Wikipedia Entries/
+/public_queries.json

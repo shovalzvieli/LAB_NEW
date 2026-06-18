@@ -1,9 +1,0 @@
-__pycache__/
-*.py[cod]
-.DS_Store
-Quit
-lexical.json
-/public_queries.json
-artifacts/chunks.faiss.npy
-data/Wikipedia Entries/
-student/

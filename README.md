@@ -30,15 +30,14 @@ The system is split across small modules:
 - `retrieve.py` embeds the query batch, searches FAISS, combines dense and
   lexical signals, and returns ranked page IDs.
 - `main.py` exposes the required `run(queries)` API.
-- `scripts/eval_public.py` is a root-level wrapper for the public evaluation
-  command used by graders.
+- `scripts/eval_public.py` is the public evaluation command used by graders.
 
 ## Setup
 
-Dependencies are listed in `section_b/requirements.txt`:
+Dependencies are listed in `requirements.txt`:
 
 ```bash
-pip install -r section_b/requirements.txt
+pip install -r requirements.txt
 ```
 
 The query embedding model
@@ -54,18 +53,11 @@ For a fresh clone with dependencies already installed:
 python scripts/eval_public.py
 ```
 
-The offline index rebuild is not part of the normal grading path. If running
-commands from inside `section_b/`, use `python scripts/eval_public.py`.
+The offline index rebuild is not part of the normal grading path.
 
 ## Public Evaluation
 
 From the repository root, run:
-
-```bash
-python scripts/eval_public.py
-```
-
-From inside `section_b/`, the equivalent command is:
 
 ```bash
 python scripts/eval_public.py
@@ -81,16 +73,16 @@ num_queries=29
 ## Submitted Artifacts
 
 The graders should not rebuild the index. The required query-time artifacts are
-committed under `section_b/artifacts/`:
+committed under `artifacts/`:
 
 | Path | Purpose | Format |
 | --- | --- | --- |
-| `section_b/artifacts/chunks.faiss.npy.part00` | First part of the serialized FAISS dense-vector index | Split NumPy `.npy` bytes |
-| `section_b/artifacts/chunks.faiss.npy.part01` | Second part of the serialized FAISS dense-vector index | Split NumPy `.npy` bytes |
-| `section_b/artifacts/index_meta.json` | Mapping from FAISS rows to `page_id`, chunk IDs, chunk kind, model name, and dimensions | JSON |
-| `section_b/artifacts/lexical.json.gz` | Compressed lexical postings used during reranking | Gzipped JSON |
+| `artifacts/chunks.faiss.npy.part00` | First part of the serialized FAISS dense-vector index | Split NumPy `.npy` bytes |
+| `artifacts/chunks.faiss.npy.part01` | Second part of the serialized FAISS dense-vector index | Split NumPy `.npy` bytes |
+| `artifacts/index_meta.json` | Mapping from FAISS rows to `page_id`, chunk IDs, chunk kind, model name, and dimensions | JSON |
+| `artifacts/lexical.json.gz` | Compressed lexical postings used during reranking | Gzipped JSON |
 
-The original full FAISS file is `section_b/artifacts/chunks.faiss.npy`, but it
+The original full FAISS file is `artifacts/chunks.faiss.npy`, but it
 is larger than GitHub's normal per-file limit. It is intentionally ignored by
 Git. At runtime, `index.py` loads the split `.part00` and `.part01` files
 directly, so a fresh clone does not need the full unsplit file.
@@ -100,8 +92,7 @@ artifact file is below GitHub's 100 MB file limit.
 
 ## Optional Offline Rebuild
 
-From inside `section_b/`, the artifacts can be regenerated from the handout
-corpus with:
+The artifacts can be regenerated from the handout corpus with:
 
 ```bash
 python scripts/build_index.py
@@ -139,8 +130,8 @@ grading.
 
 ## Pre-Submission Checklist
 
-- Install requirements from `section_b/requirements.txt`.
-- Verify the required files under `section_b/artifacts/` exist.
+- Install requirements from `requirements.txt`.
+- Verify the required files under `artifacts/` exist.
 - Run `python scripts/eval_public.py` from the repository root.
 - Do not modify `eval.py` or `evaluation.py`.
 - Confirm `git status` is clean.
@@ -149,7 +140,7 @@ grading.
 ## Assumptions
 
 - `data/public_queries.json` is included for public self-testing.
-- The prebuilt files under `section_b/artifacts/` are included in the GitHub
+- The prebuilt files under `artifacts/` are included in the GitHub
   repository.
 - `scripts/eval_public.py` and `scripts/build_index.py` are kept as provided
   evaluation/build entry points.
