@@ -144,7 +144,7 @@ grading.
 - Run `python scripts/eval_public.py` from the repository root.
 - Do not modify `eval.py` or `evaluation.py`.
 - Confirm `git status` is clean.
-- Add the presentation video link in the assumptions section when available.
+- Confirm the presentation video link is available.
 
 ## Assumptions
 
@@ -153,5 +153,5 @@ grading.
   repository.
 - `scripts/eval_public.py` and `scripts/build_index.py` are kept as provided
   evaluation/build entry points.
-- The presentation video link should be added here before final submission:
-  `TODO: add presentation video link`.
+- Presentation video:
+  https://1drv.ms/v/c/6B85FA394A157E0F/IQATlZ37i76kQ7So8NUpC3M-AYWFpoLaBbFGghbaVIT_bjg?e=tYWgCe
